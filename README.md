@@ -76,3 +76,18 @@ function conflicts(op, layer):
 
 function share_qubit(op1, op2):
     return (op1.qubit_set ∩ op2.qubit_set is not empty)
+
+	------
+
+	exmaple output:
+	C1 input : [CX(0→1), CX(2→3), CX(0→2), CX(0→3)]
+C1 packed: [FANOUT(0→{1}), FANOUT(2→{3}), FANOUT(0→{2,3})]
+
+C2 input : [CX(0→1), CX(0→2), CX(0→3), CX(0→1), CX(2→3)]
+C2 packed: [FANOUT(0→{1,2,3}), FANOUT(0→{1}), FANOUT(2→{3})]
+
+C3 input : [H(0,), CP(1.57)(1→0), CP(0.785)(2→0), CP(0.393)(3→0), H(1,)]
+C3 packed: [H(0,), CP_FANOUT(1→{0:1.57}), CP_FANOUT(2→{0:0.785}), CP_FANOUT(3→{0:0.393}), H(1,)]
+
+QFT4 input : [H(0,), CP(1.57)(0→1), CP(0.785)(0→2), CP(0.393)(0→3), H(1,), CP(1.57)(1→2), CP(0.785)(1→3), H(2,), CP(1.57)(2→3), H(3,)]
+QFT4 packed: [H(0,), CP_FANOUT(0→{1:1.57,2:0.785,3:0.393}), H(1,), CP_FANOUT(1→{2:1.57,3:0.785}), H(2,), CP_FANOUT(2→{3:1.57}), H(3,)]
