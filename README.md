@@ -40,7 +40,7 @@ This corresponds to a **greedy interval-packing / graph-coloring strategy**, whe
 - Finding an exact optimal coloring is **NP-hard**, whereas the greedy approach is simple, fast, and effective in practice
 
 ----
-Pseudocode:
+### Pseudocode:
 
 function fanout_pack(fanout_ops):
     % fanout_ops: list of fanout operations
