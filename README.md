@@ -79,8 +79,9 @@ function share_qubit(op1, op2):
 
 	------
 
-	exmaple output:
-	C1 input : [CX(0→1), CX(2→3), CX(0→2), CX(0→3)]
+	### Example output:
+	
+C1 input : [CX(0→1), CX(2→3), CX(0→2), CX(0→3)]
 C1 packed: [FANOUT(0→{1}), FANOUT(2→{3}), FANOUT(0→{2,3})]
 
 C2 input : [CX(0→1), CX(0→2), CX(0→3), CX(0→1), CX(2→3)]
