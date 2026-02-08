@@ -43,8 +43,8 @@ This corresponds to a **greedy interval-packing / graph-coloring strategy**, whe
 Pseudocode:
 
 function fanout_pack(fanout_ops):
-    # fanout_ops: list of fanout operations
-    # each fanout op = set of qubits {q1, q2, ..., qk}
+    % fanout_ops: list of fanout operations
+    % each fanout op = set of qubits {q1, q2, ..., qk}
 
     layers = empty list of layers
 
@@ -79,7 +79,8 @@ function share_qubit(op1, op2):
 
 	------
 
-	### Example output:
+	
+### Example output:
 	
 C1 input : [CX(0→1), CX(2→3), CX(0→2), CX(0→3)]
 C1 packed: [FANOUT(0→{1}), FANOUT(2→{3}), FANOUT(0→{2,3})]
