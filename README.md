@@ -13,28 +13,31 @@ This packing step enables:
 	•	Encrypted cloning / MISD-style fan-out
 
 
-What this algorithm is doing (intuitively)
+## What this algorithm is doing (intuitively)
 
-1. Treat fan-outs as “jobs”
+### 1. Treat fan-outs as “jobs”
 
-Each fan-out operation is a job that needs exclusive access to its qubits.
+Each fan-out operation is treated as a *job* that requires exclusive access to the qubits it acts on.  
+Two fan-out operations cannot be executed in the same layer if they share any qubit.
 
-⸻
+---
 
-2. Build layers greedily
+### 2. Build layers greedily
 
-For each fan-out:
-	•	Try to fit it into the earliest layer where it does not conflict
-	•	If it can’t fit anywhere, start a new layer
+For each fan-out operation:
 
-This is a greedy interval-packing / coloring strategy.
+- Try to place it into the **earliest existing layer** where it does not conflict with any already placed fan-out
+- If no such layer exists, **start a new layer**
 
-⸻
+This corresponds to a **greedy interval-packing / graph-coloring strategy**, where each layer represents a set of mutually compatible fan-out operations that can be executed in parallel.
 
-3. Why greedy works well here
-	•	Fan-out depth is constant, so minimizing the number of layers minimizes total depth
-	•	In unbounded fan-out models, this greedy approach is often asymptotically optimal
-	•	Exact optimal coloring is NP-hard, but greedy is fast and effective
+---
+
+### 3. Why greedy works well here
+
+- Fan-out operations have **constant execution depth**, so minimizing the number of layers directly minimizes the overall circuit depth
+- In **unbounded fan-out models**, greedy packing is often **asymptotically optimal**
+- Finding an exact optimal coloring is **NP-hard**, whereas the greedy approach is simple, fast, and effective in practice
 
 ----
 Pseudocode:
