@@ -1,5 +1,3 @@
-# Created on iPad.
-
 # Compiler to generate an equivalent circuit with packets of fanout operations
 
 from __future__ import annotations
@@ -277,3 +275,19 @@ if __name__ == "__main__":
 
     print("QFT4 input :", QFT4)
     print("QFT4 packed:", fanout_pack(QFT4))
+
+    # -------------------------
+    # Example with gate reordering
+    # -------------------------
+    theta = 0.3  # any angle
+   
+    CGR = [
+      CX(0, 1),                 # CX(0→1)
+      Gate("h",  (1,)),          # H(q2)
+      CX(0, 2),                 # CX(0→2)
+      Gate("rz", (2,), (theta,)),# RZ(theta)(q3)
+      CX(0, 3),                 # CX(0→3)
+    ]
+
+    print("CGR input :", CGR)
+    print("CGR packed:", fanout_pack(CGR))
