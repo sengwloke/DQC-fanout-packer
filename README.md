@@ -50,42 +50,41 @@ This corresponds to a **greedy interval-packing / graph-coloring strategy**, whe
 - Finding an exact optimal coloring is **NP-hard**, whereas the greedy approach is simple, fast, and effective in practice
 
 ----
-### Pseudocode:
 
-function fanout_pack(fanout_ops):
-    % fanout_ops: list of fanout operations
-    % each fanout op = set of qubits {q1, q2, ..., qk}
+### Key ideas the pass uses
 
-    layers = empty list of layers
+#### Safe reorder rules (typical)
 
-    for op in fanout_ops:
-        placed = false
+To enable fan-out formation, the pass relies on safe gate reordering rules:
 
-        # Try to place op into an existing layer
-        for layer in layers:
-            if not conflicts(op, layer):
-                add op to layer
-                placed = true
-                break
+- **Disjoint-qubit commute:**  
+  Gates acting on disjoint qubit sets commute and can be freely swapped.
 
-        # If no compatible layer found, create a new one
-        if not placed:
-            new_layer = empty set
-            add op to new_layer
-            add new_layer to layers
+- **Commuting families:**  
+  Certain gate families commute even when sharing qubits.  
+  Examples:
+  - All **diagonal-in-Z** gates commute with each other.
+  - Commuting Pauli-string phase operators.
 
-    return layers
+- **Structure-aware commutation:**  
+  Some structured two-qubit gates commute under specific conditions:
+  - Controlled gates with the same control but different targets may commute.
+  - Known rewrite identities (e.g., CNOT commuting patterns) can allow swaps.
 
+#### FANOUT opportunities (typical)
 
-function conflicts(op, layer):
-    for existing_op in layer:
-        if share_qubit(op, existing_op):
-            return true
-    return false
+The goal of reordering is to expose opportunities for fan-out compression:
 
+- Many gates of the form  
+  `CNOT(c → t₁), CNOT(c → t₂), ..., CNOT(c → tₖ)`  
+  can be replaced by a single  
+  `FANOUT(c → {t₁, t₂, ..., tₖ})`.
 
-function share_qubit(op1, op2):
-    return (op1.qubit_set ∩ op2.qubit_set is not empty)
+- Similarly, controlled-phase gates with the same control (and compatible angles) can be merged into a **multi-target phase fan-out**.
+
+- In real circuits these gates are often **not adjacent** initially.  
+  Reordering (via commutation) attempts to bring them together so they can be merged.
+
 
 	------
 
