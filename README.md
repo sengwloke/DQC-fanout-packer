@@ -4,16 +4,26 @@ A simple algorithm take takes a quantum circuit and generates an equivalent one 
 Why this matters for DQC / parity-based compilation
 
 This packing step enables:
+
 	•	Depth collapse of large parity layers
 	•	Efficient use of GHZ / cat states
-	•	Near-constant depth implementations of:
+
+Near-constant depth implementations of:
 	•	QFT
 	•	QAOA cost layers
-	•	Stabilizer measurements
 	•	Encrypted cloning / MISD-style fan-out
 
 
-## What this algorithm is doing (intuitively)
+# Note
+[we draw some inspiration from 
+Efficient Gate Reordering for Distributed Quantum Compiling in Data Centers.
+By Riccardo Mengoni(European Space Agency), Walter Nadalin(European Space Agency), Mathys Rennela(European Space Agency), Jimmy Rotureau(European Space Agency), Tom Darras(European Space Agency)Show All(8)
+Jul 1, 2025
+e-Print: 2507.01090 [quant-ph]
+]
+
+
+# What this algorithm is doing (intuitively)
 
 ### 1. Treat fan-outs as “jobs”
 
