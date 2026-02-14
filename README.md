@@ -15,12 +15,12 @@ Near-constant depth implementations of:
 
 
 # Note
-[we draw some inspiration from 
+We draw some inspiration from:
 Efficient Gate Reordering for Distributed Quantum Compiling in Data Centers.
 By Riccardo Mengoni(European Space Agency), Walter Nadalin(European Space Agency), Mathys Rennela(European Space Agency), Jimmy Rotureau(European Space Agency), Tom Darras(European Space Agency)Show All(8)
 Jul 1, 2025
 e-Print: 2507.01090 [quant-ph]
-]
+
 
 
 # What this algorithm is doing (intuitively)
