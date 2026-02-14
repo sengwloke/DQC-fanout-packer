@@ -51,7 +51,7 @@ This corresponds to a **greedy interval-packing / graph-coloring strategy**, whe
 
 ----
 
-### Key ideas the pass uses
+### Key ideas the algorithm uses
 
 #### Safe reorder rules (typical)
 
