@@ -46,8 +46,7 @@ This corresponds to a **greedy interval-packing / graph-coloring strategy**, whe
 ### 3. Why greedy works well here
 
 - Fan-out operations have **constant execution depth**, so minimizing the number of layers directly minimizes the overall circuit depth
-- In **unbounded fan-out models**, greedy packing is often **asymptotically optimal**
-- Finding an exact optimal coloring is **NP-hard**, whereas the greedy approach is simple, fast, and effective in practice
+- In **unbounded fan-out models**, greedy packing is simple, fast, and effective in practice
 
 ----
 
